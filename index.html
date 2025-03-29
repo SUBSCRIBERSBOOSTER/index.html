@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUBSCRIBERS BOOSTER</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        body {
+            background-color: #0d1117;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .title {
+            font-size: 50px;
+            font-weight: bold;
+            color: red;
+            text-shadow: 0 0 10px red, 0 0 20px white;
+            transition: 0.3s;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .title:hover {
+            text-shadow: 0 0 20px white, 0 0 40px red;
+            font-size: 60px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            width: 80%;
+        }
+
+        .input-box {
+            width: 80%;
+            height: 50px;
+            padding: 15px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 18px;
+            background-color: #222;
+            color: white;
+            transition: 0.3s;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .input-box:focus {
+            box-shadow: 0 0 15px white;
+            background-color: #1c1f26;
+        }
+
+        .input-box.error {
+            background-color: #f44336;
+            color: white;
+            box-shadow: 0 0 15px red;
+        }
+
+        .input-box.error::placeholder {
+            color: white;
+        }
+
+        .boost-btn {
+            margin-top: 30px;
+            width: 250px;
+            height: 60px;
+            border: none;
+            border-radius: 50px;
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .boost-btn:hover {
+            box-shadow: 0 0 20px white, 0 0 30px red;
+        }
+
+        .boost-btn::after {
+            content: "";
+            position: absolute;
+            top: var(--y, 0);
+            left: var(--x, 0);
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .boost-btn:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .how-it-works {
+            font-size: 20px;
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .how-it-works:hover {
+            color: white;
+            text-shadow: 0 0 10px red, 0 0 20px white;
+        }
+
+        .result-message {
+            margin-top: 20px;
+            font-size: 25px;
+            color: white;
+            font-weight: bold;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px red;
+            z-index: 1000;
+            animation: popupAnimation 0.5s ease-in-out;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .popup h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .popup .close-btn {
+            background-color: red;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .popup .close-btn:hover {
+            background-color: darkred;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes popupAnimation {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            font-size: 16px;
+            font-weight: bold;
+            color: red;
+            text-align: center;
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .contact-info a:hover {
+            text-shadow: 0 0 10px white, 0 0 20px red;
+        }
+
+        .whatsapp:hover {
+            color: green;
+            text-shadow: 0 0 10px green, 0 0 20px green;
+        }
+
+        .youtube:hover {
+            color: red;
+            text-shadow: 0 0 10px red, 0 0 20px red;
+        }
+
+        .email:hover {
+            color: yellow;
+            text-shadow: 0 0 10px yellow, 0 0 20px yellow;
+        }
+
+        .telegram:hover {
+            color: blue;
+            text-shadow: 0 0 10px blue, 0 0 20px blue;
+        }
+
+        .facebook:hover {
+            color: blue;
+            text-shadow: 0 0 10px blue, 0 0 20px blue;
+        }
+
+        .instagram:hover {
+            color: red;
+            text-shadow: 0 0 10px red, 0 0 20px red;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">SUBSCRIBERS BOOSTER</h1>
+
+    <div class="input-container">
+        <input type="text" class="input-box" id="channelName" placeholder="Enter YouTube channel name...">
+        <input type="number" class="input-box" id="subscriberCount" placeholder="Subscriber to add (1-100)" min="1" max="100">
+    </div>
+
+    <button class="boost-btn" id="boostBtn">
+        BOOST
+    </button>
+
+    <div class="how-it-works" id="howItWorks">HOW IT WORKS?</div>
+
+    <div class="result-message" id="resultMessage"></div>
+
+    <div class="popup" id="popup">
+        <h2>How the Algorithm Works</h2>
+        <p>1. The algorithm scans YouTube channels for growth patterns and activity.</p>
+        <p>2. It suggests subscribers based on audience preferences and engagement.</p>
+        <p>3. The system constantly improves suggestions with real-time data analysis.</p>
+        <button class="close-btn" id="closePopup">OK</button>
+    </div>
+
+    <div class="contact-info">
+        <a href="https://wa.me/0652570146" target="_blank" class="whatsapp"><span>WhatsApp</span></a>
+        <a href="mailto:subscribersbooster1@gmail.com" target="_blank" class="email"><span>Email</span></a>
+        <a href="https://t.me/subscribersboosterchannel" target="_blank" class="telegram"><span>Telegram</span></a>
+        <a href="https://www.youtube.com/@Subscribersbooster1" target="_blank" class="youtube"><span>YouTube</span></a>
+        <a href="https://www.facebook.com/subscribersbooster1" target="_blank" class="facebook"><span>Facebook</span></a>
+        <a href="https://www.instagram.com/subscribersbooster1" target="_blank" class="instagram"><span>Instagram</span></a>
+    </div>
+
+    <script>
+        // Function to generate random subscriber count
+        function generateRandomSubscribers() {
+            const randomCount = Math.floor(Math.random() * 99) + 1; // Random number between 1 and 99
+            return randomCount;
+        }
+
+        // Handle boost button click
+        document.getElementById('boostBtn').addEventListener('click', function() {
+            const channelName = document.getElementById('channelName').value;
+            let subscriberCount = parseInt(document.getElementById('subscriberCount').value);
+            const subscriberBox = document.getElementById('subscriberCount');
+            const channelBox = document.getElementById('channelName');
+
+            // Reset error styles
+            channelBox.classList.remove('error');
+            subscriberBox.classList.remove('error');
+
+            if (!channelName) {
+                channelBox.classList.add('error');
+                channelBox.setAttribute('placeholder', 'Channel name is required!');
+            }
+
+            if (isNaN(subscriberCount) || subscriberCount < 1) {
+                subscriberBox.classList.add('error');
+                subscriberBox.setAttribute('placeholder', 'Please enter a valid number (1-100)');
+            }
+
+            // Automatically set subscriber count to 100 if user enters more than 100
+            if (subscriberCount > 100) {
+                subscriberBox.classList.add('error');
+                subscriberBox.setAttribute('placeholder', 'Number must not exceed 100!');
+                subscriberBox.value = ''; // Clear input box
+                return; // Do not proceed with the result
+            }
+
+            // Process valid input
+            if (channelName && !isNaN(subscriberCount) && subscriberCount >= 1 && subscriberCount <= 100) {
+                document.getElementById('channelName').style.display = 'none';
+                document.getElementById('subscriberCount').style.display = 'none';
+                document.getElementById('boostBtn').style.display = 'none';
+
+                const resultMessage = document.getElementById('resultMessage');
+                resultMessage.innerText = 'LOADING...';
+                resultMessage.style.display = 'block';
+
+                setTimeout(() => {
+                    resultMessage.innerText = 'SUGGESTING CHANNEL...';
+                }, 2000);
+
+                setTimeout(() => {
+                    resultMessage.innerText = 'FINALIZING...';
+                }, 4000);
+
+                setTimeout(() => {
+                    const randomSubscribers = generateRandomSubscribers();
+                    resultMessage.innerText = `NEW SUBSCRIBERS SUGGESTED: ${randomSubscribers}`;
+                }, 6000);
+            }
+        });
+
+        // Handle "HOW IT WORKS?" click
+        document.getElementById('howItWorks').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'block';
+        });
+
+        // Close the pop-up
+        document.getElementById('closePopup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        // Add cursor effect on Boost Button
+        const btn = document.getElementById('boostBtn');
+        btn.addEventListener('mousemove', function(e) {
+            const rect = btn.getBoundingClientRect();
+            btn.style.setProperty('--x', e.clientX - rect.left + 'px');
+            btn.style.setProperty('--y', e.clientY - rect.top + 'px');
+        });
+    </script>
+</body>
+</html>
